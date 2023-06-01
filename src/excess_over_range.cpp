@@ -33,7 +33,6 @@ std::vector<int> excessOverRanges(
             }
         }
 
-        assert(chosenCell != -1);
         cells[chosenCell] += 1;
         for (int i = ranges.size() - 1; i >= 0; i--) {
             if (chosenCell >= ranges[i].start && chosenCell < ranges[i].end) {
