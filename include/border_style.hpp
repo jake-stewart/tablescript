@@ -2,6 +2,7 @@
 #define BORDER_STYLE_HPP
 
 #include <map>
+#include <vector>
 
 enum BorderStyle {
     SINGLE,

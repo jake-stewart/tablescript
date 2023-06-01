@@ -1,4 +1,5 @@
 #include "../include/table_lexer.hpp"
+#include <cstring>
 
 void TableLexer::lex(std::string script) {
     _script = script;

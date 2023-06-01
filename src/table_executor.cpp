@@ -1,6 +1,7 @@
 #include "../include/table_executor.hpp"
 #include "../include/range_functions.hpp"
 
+#include <cmath>
 #include <iomanip>
 #include <regex>
 #include <sstream>
