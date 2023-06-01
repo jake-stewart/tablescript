@@ -1,0 +1,12 @@
+```
+long_text = ""
+for i=1,100 do
+    long_text = long_text .. i .. " "
+end
+```
+
+?c`long_text`  | <              | ?br `long_text``long_text`
+short text     | ?r `long_text` | ^random junk
+?m short text  | ^ `long_text`  | ^ blah blah blah
+  `long_text`  | <              | < `long_text`
+

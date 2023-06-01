@@ -1,0 +1,20 @@
+```
+function stringify(table)
+    output = "{"
+    for i=1,#table do
+        if i == #table then
+            output = output .. table[i]
+        else
+            output = output .. table[i] .. ", "
+        end
+    end
+    return output .. "}"
+end
+
+four = 4
+```
+===
+1a | 2a | 3 | 1 `stringify(rowrange())` `rowmax()` `rowmin()` `stringify(rowrange(2)) .. rowmin(2)` `stringify(rowrange(1))` | 8
+===
+a0.5 | aa1.5aa | `rowmax() + 1`aa`four`a | 1 `rowsum()` `stringify(rowrange())` `rowmax()` `rowmin()` | `8
+`stringify( colrange())  ` `colmax() + colmin()` ` stringify (colrange())` ` stringify (colrange(1))``colsum()` | 5 `colavg()` | `colprod()` `colmax()` `colmin()` | 123 ` rowsum()` `colavg()` `stringify(colrange())` | 8
