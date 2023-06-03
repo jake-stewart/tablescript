@@ -57,7 +57,7 @@ char TableLexer::_next() {
 }
 
 void TableLexer::_skipWhitespace() {
-    while (strchr(" \t", _peek())) {
+    while (_peek() && strchr(" \t", _peek())) {
         _next();
     }
 }
