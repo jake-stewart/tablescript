@@ -92,17 +92,15 @@ A | B                ┌───┬───┐
 The `?` operator, followed by alignment operator(s) can align a cell.
 
 ```alignments.tbl
-┌────────┬───────────────────┐
-│ Symbol │ Alignment         │
-├────────┼───────────────────┤
-│ l      │ Horizontal Left   │
-│ c      │ Horizontal Center │
-│ r      │ Horizontal Right  │
-├────────┼───────────────────┤
-│ t      │ Vertical Top      │
-│ m      │ Vertical Middle   │
-│ b      │ Vertical Bottom   │
-└────────┴───────────────────┘
+  Symbol   Alignment          
+ ──────────────────────────── 
+  l        Horizontal Left    
+  c        Horizontal Center  
+  r        Horizontal Right   
+                              
+  t        Vertical Top       
+  m        Vertical Middle    
+  b        Vertical Bottom    
 ```
 
 ```
@@ -319,6 +317,10 @@ Example Tables
 
 #### Script
 ```
+{
+    border(NONE)
+}
+
 Name     | Price | Quantity | Total
 ===
 Tomato   | $1.99 | 8        | { rowprod() }
@@ -331,17 +333,15 @@ Ham      | $3.00 | 5        | { rowprod() }
 
 #### Output
 ```purchase_order.tbl
-┌─────────┬───────┬──────────┬────────┐
-│ Name    │ Price │ Quantity │ Total  │
-╞═════════╪═══════╪══════════╪════════╡
-│ Tomato  │ $1.99 │        8 │ $15.92 │
-│ Potato  │ $0.50 │        3 │  $1.50 │
-│ Bread   │ $3.00 │        1 │  $3.00 │
-│ Lettuce │ $0.85 │        2 │  $1.70 │
-│ Ham     │ $3.00 │        5 │ $15.00 │
-├─────────┴───────┴──────────┼────────┤
-│                      Total │ $37.12 │
-└────────────────────────────┴────────┘
+  Name      Price   Quantity   Total
+ ────────────────────────────────────
+  Tomato    $1.99          8   15.92
+  Potato    $0.50          3    1.50
+  Bread     $3.00          1    3.00
+  Lettuce   $0.85          2    1.70
+  Ham       $3.00          5   15.00
+
+                       Total   37.12
 ```
 
 #### Script
