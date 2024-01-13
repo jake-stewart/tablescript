@@ -1,11 +1,11 @@
-```
+{
 border(ROUND)
 a = "abc"
 b = "abc"
-```
+}
 ===
 test | test | test
 ===
-`a` |<  | test
+{a} |<  | test
 ---
-test | `b` | <
+test | {b} | <

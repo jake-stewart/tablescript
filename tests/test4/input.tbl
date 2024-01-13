@@ -1,4 +1,4 @@
-```
+{
 padding(0)
 border(DOTTED)
 widths(20, 10)
@@ -27,12 +27,12 @@ items = [[
 
 ]]
 more_items = list("four", "five", "six    ")
-```
+}
 ===
-^`rowprod()` | \|test\| | \<test\>
+^{rowprod()} | \|test\| | \<test\>
 ===
-^ | `items` | `more_items`     
+^ | {items} | {more_items}     
 ===
-`long_str` | < | ^ `long_str`   
-?br`items` | < | `long_str`
+{long_str} | < | ^ {long_str}   
+?br{items} | < | {long_str}
 ===

@@ -122,16 +122,17 @@ C    | D             │     A │
 ```
 
 ### Code Snippets
-Lua expressions can be inserted using the backtick (\`) operator.
-Lua statements can be inserted at the top of the script with triple backticks.
+Lua code can be inserted using curly braces (`{` and `}`).
+Code will be treated as expressions if the code is a single line,
+otherwise they are statements. You can escape code as expected with `\{}`.
 For more information about scripting, look at the Scripting section.
 
 ```
 Script               Result   
 
-A | `1 + 1`          ┌───┬───┐
+A | {1 + 1}          ┌───┬───┐
 -----------          │ A │ 2 │
-C | `3 * 3`          ├───┼───┤
+C | {3 * 3}          ├───┼───┤
                      │ C │ 9 │
                      └───┴───┘
 ```
@@ -315,12 +316,12 @@ Example Tables
 ```
 Name     | Price | Quantity | Total
 ===
-Tomato   | $1.99 | 8        | `rowprod()`
-Potato   | $0.50 | 3        | `rowprod()`
-Bread    | $3.00 | 1        | `rowprod()`
-Lettuce  | $0.85 | 2        | `rowprod()`
-Ham      | $3.00 | 5        | `rowprod()`
-?r Total | <     | <        | `colsum()`
+Tomato   | $1.99 | 8        | { rowprod() }
+Potato   | $0.50 | 3        | { rowprod() }
+Bread    | $3.00 | 1        | { rowprod() }
+Lettuce  | $0.85 | 2        | { rowprod() }
+Ham      | $3.00 | 5        | { rowprod() }
+?r Total | <     | <        | { colsum() }
 ```
 
 #### Output
@@ -340,7 +341,7 @@ Ham      | $3.00 | 5        | `rowprod()`
 
 #### Script
 ```
-\`\`\`
+{
 dog_desc = "Dogs are domesticated mammals known for their loyalty and companionship to humans. They come in various breeds, sizes, and colors, and are social animals that form strong bonds with their owners and families. Dogs are versatile and serve various roles, including working, service, and pet companions. They are better than cats."
 dog_dot_points = [[
 - Domesticated
@@ -353,16 +354,16 @@ cat_dot_points = list("Feral", "Annoying", "Ugly")
 
 rat_desc = "Rats are small rodents found worldwide, known for their quick movements and ability to squeeze through tiny openings. They have a compact body, a pointed snout, and large ears. Rats are often considered pests due to their ability to damage crops and spread diseases, but they also play a crucial role in various ecosystems as prey for predators and as experimental subjects in scientific research."
 rat_dot_points = "- Better than cats"
-\`\``
+}
 
 ===
 Name | Description | Dot points
 ===
-Dog  | `dog_desc`  | `dog_dot_points`
+Dog  | { dog_desc }  | { dog_dot_points }
 ---
-Cat  | `cat_desc`  | `cat_dot_points`
+Cat  | { cat_desc }  | { cat_dot_points }
 ---
-Rat  | `rat_desc`  | `rat_dot_points`
+Rat  | { rat_desc }  | { rat_dot_points }
 ---
 ```
 

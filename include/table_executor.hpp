@@ -93,7 +93,6 @@ private:
     static int _funcPadding(lua_State *L);
     static int _funcList(lua_State *L);
     static int _funcDecimals(lua_State *L);
-
     static int _funcRound(lua_State *L);
     static int _funcFloor(lua_State *L);
     static int _funcCeil(lua_State *L);
@@ -103,6 +102,7 @@ private:
         void (*func)(lua_State *, std::vector<std::string> &), bool rowWise
     );
 
+    // some comment
     static int _funcRowrange(lua_State *L);
     static int _funcRowsum(lua_State *L);
     static int _funcRowprod(lua_State *L);

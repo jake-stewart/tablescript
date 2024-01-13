@@ -13,17 +13,33 @@ std::vector<Token> &TableLexer::getTokens() {
 }
 
 void TableLexer::_lex() {
-    _lexScript();
+    // while (true) {
+    //     _skipWhitespace();
+    //     char c;
+    //     if ((c = _peek()) == 0 || c != Symbol::ROW_SEP) {
+    //         break;
+    //     }
+    //     _next();
+    // }
     while (true) {
-        _skipWhitespace();
-        char c;
-        if ((c = _peek()) == 0 || c != Symbol::ROW_SEP) {
-            break;
+        if (_peek() == '{') {
+            std::string script;
+            _next();
+            _lexLua(script);
+            _next();
+            if (script.find('\n') != std::string::npos) {
+                _tokens.push_back(Token(TOKEN_CODE_BLOCK, script));
+                if (_peek() == '\n') {
+                    _next();
+                    continue;
+                }
+                continue;
+            }
+            _tokens.push_back(Token(TOKEN_INLINE_CODE, script));
         }
-        _next();
-    }
-    while (true) {
-        _lexBorders();
+        else {
+            _lexBorders();
+        }
         if (_peek() == Symbol::STYLE) {
             _lexStyle();
         }
@@ -42,62 +58,30 @@ void TableLexer::_lex() {
 }
 
 char TableLexer::_peek() {
-    if (_idx >= _script.length()) {
+    return _peek(0);
+}
+
+char TableLexer::_peek(int n) {
+    if (_idx + n >= _script.length()) {
         return 0;
     }
-    return _script[_idx];
+    return _script[_idx + n];
 }
 
 char TableLexer::_next() {
-    _idx += 1;
+    return _next(1);
+}
+
+char TableLexer::_next(int n) {
+    _idx += n;
     if (_idx > _script.length()) {
         return 0;
     }
-    return _script[_idx - 1];
+    return _script[_idx - n];
 }
 
 void TableLexer::_skipWhitespace() {
     while (_peek() && strchr(" \t", _peek())) {
-        _next();
-    }
-}
-
-void TableLexer::_lexScript() {
-    char c;
-    if (_peek() != Symbol::CODE) {
-        return;
-    }
-    int start = _idx;
-    _next();
-    if (_next() == Symbol::CODE && _next() == Symbol::CODE) {
-        _lexCodeBlock();
-        return;
-    }
-    _idx = start;
-}
-
-void TableLexer::_lexCodeBlock() {
-    std::string code = "";
-    char c;
-    while (true) {
-        while ((c = _peek()) != 0 && c != Symbol::CODE) {
-            _next();
-            code += c;
-        }
-        if (_peek() == 0) {
-            break;
-        }
-        int idx = _idx;
-        _next();
-        if (_next() == Symbol::CODE && _next() == Symbol::CODE) {
-            break;
-        }
-        _idx = idx;
-        code += _next();
-    }
-    _next();
-    _tokens.push_back(Token(TOKEN_CODE_BLOCK, code));
-    while (_peek() == Symbol::ROW_SEP) {
         _next();
     }
 }
@@ -113,12 +97,16 @@ void TableLexer::_lexRow() {
             }
             _lexSeparator();
         }
-        else if (c == Symbol::CODE) {
+        else if (c == '{') {
             if (text.length()) {
                 _tokens.push_back(Token(TOKEN_TEXT, text));
                 text = "";
             }
-            _lexInlineCode();
+            _next();
+            std::string script;
+            _lexLua(script);
+            _tokens.push_back(Token(TOKEN_INLINE_CODE, script));
+            _next();
         }
         else if (c == '\\') {
             _next();
@@ -169,20 +157,6 @@ void TableLexer::_lexStyle() {
     _tokens.push_back(Token(TOKEN_STYLE, style));
 }
 
-void TableLexer::_lexInlineCode() {
-    _next();
-    std::string code = "";
-    char c;
-    while ((c = _peek()) != 0 && c != Symbol::CODE && c != Symbol::ROW_SEP) {
-        code += c;
-        _next();
-    }
-    _tokens.push_back(Token(TOKEN_INLINE_CODE, code));
-    if (_peek() == Symbol::CODE) {
-        _next();
-    }
-}
-
 bool TableLexer::_lexBorder(char symbol, TokenType tokenType) {
     if (_idx >= _script.length()) {
         return false;
@@ -219,6 +193,77 @@ void TableLexer::_lexBorders() {
         }
         if (!hasBorder) {
             break;
+        }
+    }
+}
+
+void TableLexer::_lexLua(std::string &script) {
+    while (true) {
+        char c = _peek();
+        if (c == 0 || c == '}') {
+            break;
+        }
+        script += _next();
+        switch (c) {
+            case '{':
+                _lexLua(script);
+                if (_peek() == '}') {
+                    script += _next();
+                }
+                break;
+            case '"':
+            case '\'':
+                _lexLuaString(script, c);
+                if (_peek() == c) {
+                    script += _next();
+                }
+                break;
+            case '[':
+                if (_peek() == '[') {
+                    script += _next();
+                    _lexLuaMultilineString(script);
+                    if (_peek() == ']') {
+                        script += _next();
+                        if (_peek() == ']') {
+                            script += _next();
+                        }
+                    }
+                    break;
+                }
+        }
+        if (c == 0) {
+            break;
+        }
+    }
+}
+
+void TableLexer::_lexLuaMultilineString(std::string &script) {
+    while (true) {
+        char c = _peek();
+        if (c == 0) {
+            return;
+        }
+        if (c == ']') {
+            if (_peek(1) == ']') {
+                return;
+            }
+        }
+        script += _next();
+    }
+}
+
+void TableLexer::_lexLuaString(std::string &script, char type) {
+    while (true) {
+        char c = _peek();
+        if (c == 0) {
+            return;
+        }
+        if (c == type) {
+            return;
+        }
+        script += _next();
+        if (c == '\\' && _peek()) {
+            script += _next();
         }
     }
 }

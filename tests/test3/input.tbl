@@ -1,12 +1,12 @@
-```
+{
 border(ROUND)
 separator(THICK)
-```
+}
 Name     | Price | Quantity | Total
 ===
-Tomato   | $1.99 | 8        | `rowprod()`
-Potato   | $0.50 | 3        | `rowprod()`
-Bread    | $3.00 | 1        | `rowprod()`
-Lettuce  | $0.85 | 2        | `rowprod()`
-Ham      | $3.00 | 5        | `rowprod()`
-?r Total | <     | <        | `colsum()`
+Tomato   | $1.99 | 8        | {rowprod()}
+Potato   | $0.50 | 3        | {rowprod()}
+Bread    | $3.00 | 1        | {rowprod()}
+Lettuce  | $0.85 | 2        | {rowprod()}
+Ham      | $3.00 | 5        | {rowprod()}
+?r Total | <     | <        | {colsum()}
