@@ -77,6 +77,8 @@ std::string TableExecutor::_eval(std::string code) {
 }
 
 void TableExecutor::_addCallbacks() {
+    lua_pushinteger(_luaState, NONE);
+    lua_setglobal(_luaState, "NONE");
     lua_pushinteger(_luaState, SINGLE);
     lua_setglobal(_luaState, "SINGLE");
     lua_pushinteger(_luaState, DOUBLE);
@@ -280,6 +282,9 @@ int TableExecutor::_funcBorder(lua_State *L) {
         if (!_executor->_setSeparatorStyle) {
             if (value == ASCII || value == DOTTED || value == THICK_ASCII) {
                 _executor->_sharedData->separatorStyle = THICK_ASCII;
+            }
+            else if (value == NONE) {
+                _executor->_sharedData->separatorStyle = SINGLE;
             }
             else {
                 _executor->_sharedData->separatorStyle = DOUBLE;

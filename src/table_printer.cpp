@@ -6,7 +6,9 @@ void TablePrinter::print() {
     _pad = repeat(" ", _table.padding);
 
     _populateColumnSweeper();
-    _printTopBorder();
+    if (_table.border != NONE) {
+        _printTopBorder();
+    }
     for (int row = 0; row < _table.rowHeights.size(); row++) {
         _printRow(row);
         if (row < _table.rows.size() - 1) {
@@ -14,7 +16,9 @@ void TablePrinter::print() {
             _prepareRow(row + 1);
         }
     }
-    _printBottomBorder();
+    if (_table.border != NONE) {
+        _printBottomBorder();
+    }
 }
 
 void TablePrinter::_resetColumnSweeper(ColumnSweeper &sweeper, int row) {

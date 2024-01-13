@@ -5,6 +5,7 @@
 #include <vector>
 
 enum BorderStyle {
+    NONE,
     SINGLE,
     DOUBLE,
     THICK,
@@ -36,6 +37,19 @@ typedef const std::map<BorderStyle, const std::vector<const char *>>
     StyleCharLookup;
 
 const std::map<BorderStyle, StyleCharLookup> STYLES = {
+    {NONE,
+     {
+         {NONE, {" ", " ", " ", " ", " ", " " , " ", " ", " ", " ", " "}},
+         {SINGLE, {" ", " ", " ", " ", " ", " " , "─", "─", "─", "─", " "}},
+         {ROUND, {" ", " ", " ", " ", " ", " " , "─", "─", "─", "─", " "}},
+         {DOUBLE, {" ", " ", " ", " ", " ", " " , "═", "═", "═", "═", " "}},
+         {DOTTED, {" ", " ", " ", " ", " ", " ", ".", ".", ".", ".", " "}},
+         {ASCII, {" ", " ", " ", " ", " ", " " , "-", "-", "-", "-", " "}},
+         {THICK_ASCII, {" ", " ", " ", " ", " ", " " , "=", "=", "=", "=", " "}},
+         {DASHED, {" ", " ", " ", " ", " ", " " , "╌", "╌", "╌", "╌", " "}},
+         {THICK_DASHED, {" ", " ", " ", " ", " ", " " , "╍", "╍", "╍", "╍", " "}},
+         {BLOCK, {" ", " ", " ", " ", " ", " " , "▀", "▀", "▀", "▀", " "}},
+     }},
     {SINGLE,
      {
          {SINGLE, {"┌", "┐", "└", "┘", "├", "┤", "┬", "┴", "┼", "─", "│"}},
