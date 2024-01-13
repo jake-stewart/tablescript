@@ -143,68 +143,73 @@ Scripting
 
 ### Functions
 ```functions.tbl
-┌──────────────────┬───────────────────────────────────────────────────────────┐
-│ Function         │ Description                                               │
-╞══════════════════╪═══════════════════════════════════════════════════════════╡
-│ width(int)       │ Set the table width. A value of zero will make the table  │
-│                  │ stretch-to-fit.                                           │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ maxwidth(int)    │ Set the maximum width the table can grow to. A value of   │
-│                  │ zero means infinite max width. Default is 80.             │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ widths(*int)     │ Set each column width individually. A value of zero will  │
-│                  │ make the column stretch-to-fit.                           │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ maxwidths(*int)  │ Set the maximum width for each column individually. A     │
-│                  │ value of zero means infinite max width.                   │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ border(STYLE)    │ Set the table border style. See the Table Style section   │
-│                  │ for possible styles.                                      │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ separator(STYLE) │ Set the table thick separator style (the equals           │
-│                  │ operator). See the Table Style section for possible       │
-│                  │ styles.                                                   │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowrange(int?)   │ Create a table containing all the numbers in the current  │
-│                  │ row up to the current column. If a number is provided,    │
-│                  │ then only cells within that distance to the current       │
-│                  │ column are included. Only the first number found in each  │
-│                  │ cell is used. The current cell is excluded.               │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowsum(int?)     │ Sum all the numbers found using the rowrange.             │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowprod(int?)    │ Mulitiply all the numbers found using rowrange.           │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowavg(int?)     │ Average all the numbers found using rowrange.             │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowmax(int?)     │ Find the largest number in the numbers found using        │
-│                  │ rowrange.                                                 │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ rowmin(int?)     │ Find the smallest number in the numbers found using       │
-│                  │ rowrange.                                                 │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colrange(int?)   │ Create a table containing all the numbers in the current  │
-│                  │ column up to the current row. If a number is provided,    │
-│                  │ then only cells within that distance to the current row   │
-│                  │ are included. Only the first number found in each cell is │
-│                  │ used. The current cell is excluded.                       │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colsum(int?)     │ Sum all the numbers found using the colrange.             │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colprod(int?)    │ Mulitiply all the numbers found using colrange.           │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colavg(int?)     │ Average all the numbers found using colrange.             │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colmax(int?)     │ Find the largest number in the numbers found using        │
-│                  │ colrange.                                                 │
-├──────────────────┼───────────────────────────────────────────────────────────┤
-│ colmin(int?)     │ Find the smallest number in the numbers found using       │
-│                  │ colrange.                                                 │
-└──────────────────┴───────────────────────────────────────────────────────────┘
+  Function           Description                                                
+ ------------------------------------------------------------------------------ 
+  width(int)         Set the table width. A value of zero will make the table   
+                     stretch-to-fit.                                            
+                                                                                
+  maxwidth(int)      Set the maximum width the table can grow to. A value of    
+                     zero means infinite max width. Default is 80.              
+                                                                                
+  widths(*int)       Set each column width individually. A value of zero will   
+                     make the column stretch-to-fit.                            
+                                                                                
+  maxwidths(*int)    Set the maximum width for each column individually. A      
+                     value of zero means infinite max width.                    
+                                                                                
+  border(STYLE)      Set the table border style. See the Table Style section    
+                     for possible styles.                                       
+                                                                                
+  separator(STYLE)   Set the table thick separator style (the equals            
+                     operator). See the Table Style section for possible        
+                     styles.                                                    
+                                                                                
+  rowrange(int?)     Create a table containing all the numbers in the current   
+                     row up to the current column. If a number is provided,     
+                     then only cells within that distance to the current        
+                     column are included. Only the first number found in each   
+                     cell is used. The current cell is excluded.                
+                                                                                
+  rowsum(int?)       Sum all the numbers found using the rowrange.              
+                                                                                
+  rowprod(int?)      Mulitiply all the numbers found using rowrange.            
+                                                                                
+  rowavg(int?)       Average all the numbers found using rowrange.              
+                                                                                
+  rowmax(int?)       Find the largest number in the numbers found using         
+                     rowrange.                                                  
+                                                                                
+  rowmin(int?)       Find the smallest number in the numbers found using        
+                     rowrange.                                                  
+                                                                                
+  colrange(int?)     Create a table containing all the numbers in the current   
+                     column up to the current row. If a number is provided,     
+                     then only cells within that distance to the current row    
+                     are included. Only the first number found in each cell is  
+                     used. The current cell is excluded.                        
+                                                                                
+  colsum(int?)       Sum all the numbers found using the colrange.              
+                                                                                
+  colprod(int?)      Mulitiply all the numbers found using colrange.            
+                                                                                
+  colavg(int?)       Average all the numbers found using colrange.              
+                                                                                
+  colmax(int?)       Find the largest number in the numbers found using         
+                     colrange.                                                  
+                                                                                
+  colmin(int?)       Find the smallest number in the numbers found using        
+                     colrange.                                                  
 ```
 
 Styles
 ------
+### NONE
+```
+    Example Table
+ ───────────────────
+  Row One   Row One
+  Row Two   Row Two
+```
 
 ### SINGLE
 ```
