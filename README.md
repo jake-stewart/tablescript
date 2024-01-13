@@ -144,7 +144,7 @@ Scripting
 ### Functions
 ```functions.tbl
   Function           Description                                                
- ------------------------------------------------------------------------------ 
+ ────────────────────────────────────────────────────────────────────────────── 
   width(int)         Set the table width. A value of zero will make the table   
                      stretch-to-fit.                                            
                                                                                 
