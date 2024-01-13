@@ -63,12 +63,12 @@ C | C                ╞═══╪═══╡
 ```
 
 ### Horizontal Merge
-The `<` operator will merge a cell with the cell to its right.
+The `<` operator will merge a cell with the cell to its left.
 
 ```
 Script               Result
 
-A | B                ┌───────┐
+A | <                ┌───────┐
 C | D                │ A     │
                      ├───┬───┤
                      │ C │ D │
